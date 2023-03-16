@@ -1,6 +1,6 @@
 FROM node:current-alpine3.11 as build-stage
 
-# RUN mkdir -p /app
+RUN mkdir -p /app
 
 WORKDIR /usr/src/app
 
@@ -12,9 +12,9 @@ COPY . .
 
 RUN npm run build --prod
 
-# CMD ["npm", "start"]
+CMD ["npm", "start"]
 
-FROM nginx:latest-alpine as prod-stage
+FROM nginx
 
 COPY --from=build-stage /usr/src/app/dist/my-movie-plan /user/share/nginx/html
 
